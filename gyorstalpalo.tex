@@ -1,0 +1,234 @@
+\documentclass[12pt]{article}
+\setlength{\textwidth}{17cm}
+\setlength{\textheight}{24cm}
+\setlength{\topmargin}{-2cm}
+\setlength{\footskip}{1cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\parindent}{0cm}
+
+
+\usepackage{amsmath}
+\usepackage[magyar]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{fixltx2e}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\theoremstyle{plain}
+\usepackage{graphicx}
+
+%\usepackage{gensymb}
+\usepackage{float}
+
+%% New commands
+\newcommand{\ket}[1]{\left| #1 \right >}
+\newcommand{\bra}[1]{\left < #1 \right |}
+\newcommand{\bracket}[2]{\left < #1 \middle | #2 \right>}
+\newcommand{\norm}[1]{\left{||} #1 \right{||}}
+\newcommand{\commut}[2]{\left [ #1 , #2 \right]}
+
+%% Pauli matrices
+\newcommand{\sigx}{\sigma_x}
+\newcommand{\sigy}{\sigma_y}
+\newcommand{\sigz}{\sigma_z}
+
+\newcommand{\paulix}{
+    \left( \begin{array}{cc}
+        0 & 1 \\
+        1 & 0
+    \end{array}
+    \right)
+}
+\newcommand{\pauliy}{
+    \left( \begin{array}{cc}
+        0 & -i \\
+        i & 0
+    \end{array}
+    \right)
+}
+\newcommand{\pauliz}{
+    \left( \begin{array}{cc}
+        1 & 0 \\
+        0 & -1
+    \end{array}
+    \right)
+}
+\newtheorem*{theorem*}{Tétel}
+\newtheorem*{def*}{Definíció}
+\newtheorem*{pld*}{Példa}
+
+\begin{document}
+
+\title{Kvantummechanika gyorstalpaló}
+\maketitle
+
+\section{Bevezetés}
+A kvantummechanika formalizmusának az alapja a $\mathcal{H}$ komplex Hilbert tér. A kvantummechanikai állapotok a $\mathcal{H}$ Hilbert tér
+elemei, vektorai.
+
+\subsection{Dirac-jelölés}
+A $\mathcal{H}$ Hilbert tér elemei a $\ket{\psi}$ vektorok. A $\mathcal{H}^{*}$ duális térben a vektorokat $\bra{\phi}$
+-vel jelöljük.
+\\ A vektorok skalárszorzására a következő igaz:
+\begin{itemize}
+    \item $\bracket{\phi}{\psi} \in \mathbb{C}$
+    \item $\bracket{\phi}{\psi} = \bracket{\psi}{\phi}^{*}$
+    \item $ \norm \psi^2 = \bracket{\psi}{\psi} \geq 0$
+\end{itemize}
+További azonosságok:
+\begin{itemize}
+    \item $(c\ket\psi)^{*} = c^* \bra\psi$
+\end{itemize}
+\\ 
+Ortonormált bázisról beszélünk, ha $\bracket{e_i}{e_j} = \delta_{ij}$
+\subsubsection{Reprezentáció}
+Számolások során a Hilbert-tér általában az $\mathcal{L}^2$-tér.
+$$ \psi: \mathbb{R} \rightarrow \mathbb{C} \in \mathcal{L}^2 \iff \norm \psi^2 = \int\limits_{-\infty}^{\infty} |\psi(x)|^2 dx < \infty $$
+\subsection{Kvantumállapot és Born-féle értelmezés}
+A kvantummechanikában minden állapothoz rendelhető egy $\ket\psi$ vektor.
+Az ilyen állapotok 1-re normált állapotok kell hogy legyenek, vagyis
+$\norm \psi = \bracket{\psi}{\psi} = 1$.
+Abban az esetben ha adott egy $\ket k$ bázis, és $\ket \psi$ felírható ezen a bázison:
+$$\ket\psi = \sum\limits_{k=0}^{n} c_k\ket k$$
+ahol  $c_k = \bracket{k}{\psi}$ és ez alapján
+$$\ket \psi = \sum\limits_{k=0}^{n} \bracket{k}{\psi}\ket k $$
+
+Ekkor a normálásból következik, hogy 
+$$\bracket{\psi}{\psi} = \sum\limits_{k=0}^{n} c_k^* \sum\limits_{j=0}^{n} c_j \bracket{k}{j} =
+\sum\limits_{k=0}^{n} |c_k|^2 = 1$$
+továbbá
+$$\sum\limits_{k=0}^{n} \ket k \bra k = \hat{1}$$
+
+Fent $|c_k|^2$ annak a valószínűsége, hogy a $\ket \psi$ állapotban levő rendszer éppen $\ket k$ állapotban található.
+Ez a valószínűség nem feltétlenül 0, mert a $\ket \psi$ egy szuperponált állapot.
+\\ Tehát ha egy rendszer a $\ket a$ állapotban van preparálva és arra vagyok kíváncsi, hogy mi a valószínűsége annak,
+hogy $\ket b$ állapotban találom, akkor a $p = |\bracket{b}{a}|^2$ értéket kell kiszámolni.
+\subsection{Fiziaki mennyiségek és operátorok}
+A $\mathcal{H}$ Hilbert téren értelmezhetők az $\hat{A} : \mathcal{H} \rightarrow \mathcal{H}$  típusú operátorok.
+Értelmezhető az $\hat{A}$ operátor hermitikus adjungáltja a követkző képpen :
+$$\bra \phi \hat{A} \ket \psi = \bra \psi \hat{A}^\dag \ket \phi$$
+Itt $\hat{A}^\dag$ -ot az $\hat{A}$ hermitikus adjungáltjának nevezzük és igaz, hogy ha
+$$\ket w = \hat{A}\ket v \implies \bra w = \bra v \hat{A}^\dag$$
+
+\begin{def*}
+    A $\hat{H}$ operátort hermitikusnak nevezzük ha $\hat H^\dag = \hat H$.
+\end{def*}
+
+\begin{theorem*}
+    A kvantummechanikában minden fizikai állapothoz rendelhető egy hermitikus operátor.
+\end{theorem*}
+
+\begin{pld*}
+    Az impulzus operátora $\hat p = -i\hbar \nabla$, az energia operátora $\hat H = \frac{\hat p^2}{2m} + \hat V$.
+\end{pld*}
+
+\begin{def*}
+    Egy $\hat U$ operátort unitérnek nevezünk, ha $\hat U^{-1} = \hat U ^\dag$.
+\end{def*}
+
+\begin{pld*}
+    Az időfejlődés operátora $\hat U(t) = e^{-\frac{i}{\hbar}\hat H t}$ unitér operátor.
+\end{pld*}
+
+A hermitikus operátorok sajátértékei mindig valósak. Ha egy operátor sajátvektorai ortonormált bázist alkotnak, akkor:
+$$ \hat A = \sum\limits_{n} a_n \ket n \bra n \textrm{, ahol } \hat A \ket n = a_n \ket n $$
+\begin{theorem*}
+    Egy hermitikus operátor sajátvektorai mindig ortgonálisak.
+\end{theorem*}
+Illetve, ha egy $\hat A$ operátor sajátvektorai ortonormált bázist alkotnak, akkor egy tetszőleges $\ket \psi$ vektor
+kifejthető ezen a bázison:
+$$\hat A \ket n = a_n \ket n \textrm{, és} \bracket{n}{m} = \delta_{mn} \implies \ket\psi = \sum\limits_n \bracket{n}{\psi} \ket n 
+\equiv  \sum\limits_n c_n \ket n$$ 
+Legyen most $\hat A$ hermitikus, $\ket\psi$ egy állapot, úgy, hogy $\hat A \ket n = a_n\ket n$ és $\ket\psi = \sum\limits_n c_n \ket n$.
+Ekkor az $\hat A \ket\psi$ vektor $b_m$ együtthatói az $\ket n$ bázison:
+$$b_m = \bracket{m}{\hat A \psi} = \sum\limits_n \bra{m} \hat A \ket n \bracket{n}{\psi} = \sum\limits_n A_{mn}c_n$$
+Ezért $$ A_{mn} = \bra m \hat A \ket n$$
+$|\bra \phi \hat A \ket \psi|^2$ az minek a valószínűsége?
+
+\subsection{Kommutátorok}
+\begin{theorem*}
+    Az $\hat A$ és $\hat B$ kommutátora $\commut{\hat A}{\hat B} = \hat A \hat B - \hat B \hat A$. 
+\end{theorem*}
+\begin{itemize}
+    \item $\commut{\hat x_i}{\hat x_j} = 0$
+    \item $\commut{\hat p_i}{\hat p_j} = 0$
+    \item $\commut{\hat x_i}{\hat p_j} = i\hbar \delta_{ij}$
+    \item $\commut{\hat L_i}{\hat L_j} = i \hbar \varepsilon_{ijk}\hat L_k$
+    \item $\commut{\hat S_i}{\hat S_j} = i \hbar \varepsilon_{ijk}\hat S_k$
+    \item $\commut{\hat J_i}{\hat J_j} = i \hbar \varepsilon_{ijk}\hat J_k$
+    \item $\commut{\hat J^2}{\hat J_i} = \commut{\hat S^2}{\hat S_i} = \commut{\hat L^2}{\hat L_i} = 0$
+    \item $\commut{\hat L_i}{\hat S_j} = 0$
+    \item $\commut{\hat x_i}{\hat L_j} = i \hbar \varepsilon_{ijk}\hat x_k$
+    \item $\commut{\hat p_i}{\hat L_j} = i \hbar \varepsilon_{ijk}\hat p_k$    
+    \item Ha $\hat A$ hermitikus $\implies \hat A^\dag = \hat A \implies \commut{\hat A^\dag}{\hat A} = 0$  
+    
+    
+\end{itemize}
+
+\section{Impulzusmomentumok}
+\subsection{Pálya-impulzusmomentum}
+A kvantummechanikai impulzusmomentum operátora $\hat{\vec L} = \hat{\vec r} \times \hat{\vec p} = -i \hbar (\vec r \times \nabla)$.
+
+Gömbi koordinátarendszerben felírva:
+\begin{itemize}
+    \item $
+        \hat L^2 = -\hbar^2 \left(\frac{1}{\sin \theta} \frac{\partial}{\partial \theta} \left(\sin\theta\frac{\partial}{\partial \theta}\right) 
+        + \frac{1}{\sin^2 \theta}\frac{\partial^2}{\partial\varphi^2}\right)
+    $
+    \item $
+        \hat L_z = -i\hbar \frac{\partial}{\partial\varphi}
+    $
+    \item $
+      \hat L_{\pm} = \hat L_x \pm i \hat L_y
+    $
+    \item $
+        \hat L_+ = \hbar e^{i\varphi} \left( \frac{\partial}{\partial \theta} - i \cot\theta \frac{\partial}{\partial \varphi}\right)
+    $
+    \item $
+        \hat L_- = \hbar e^{-i\varphi} \left( - \frac{\partial}{\partial \theta} - i \cot\theta \frac{\partial}{\partial \varphi}\right)
+    $
+    \item $
+        \commut{\hat L_+}{\hat L_-} = 2 \hbar L_z
+    $
+    \item $
+        \hat L^2 = \hat L_+ \hat L_- + \hat L_z^2 - \hbar \hat L_z
+    $
+\end{itemize}
+Az $\hat L$ operátor sajátállapotait két kvantumszám határozza meg , $l$ és $m_l$, a sajátvektorokat ezért $\ket{l,m_l}$ jelöli.
+A sajátértékek a következők lehetnek: $l\in \{0,1,2, ...\}$, $m_l \in \{-l,... 0, ..., l\}$.
+
+A továbbiakban lusta fizikus módon $m_l$ helyett $m$-et írunk.
+Ezzel a jelöléssel igazak a következő azonosságok:
+\begin{itemize}
+    \item $
+        \hat L^2 \ket{l, m} = \hbar^2 l (l+1) \ket{l,m}
+    $
+    \item $
+        \hat L_z \ket{l, m} = \hbar m \ket{l,m}
+    $
+    \item $
+      \hat L_{\pm}\ket{l, m} = \hbar \sqrt{l(l+1) - m(m\pm1)}\ket{l,m\pm 1}
+    $
+    \item $
+        \hat L_+ \ket{l,m=l} = 0 ~~ \textrm{és} ~~ \hat L_- \ket{l,m=-l} = 0
+    $
+\end{itemize}
+Ha $\ket{l,m}$-eket az $\mathcal{L}^2$ téren akarjuk ábrázolni, akkor:
+\[
+    \bracket{\theta, \varphi}{l,m} = Y^m_l(\theta, \varphi)
+\]
+\[
+   \bracket{l',m'}{l,m} = \int \limits_0^{\pi}\sin\theta d \theta \int \limits_0^{2\pi}d \varphi (Y^{m'}_{l'})^{*} Y^m_l = \delta_{ll'}\delta_{mm'}
+\]
+\subsection{Spin}
+A spin-operátort $\hat S$ jelöli, sajátállapotait két kvantumszám adja meg, $s$ és $m_s$, úgy, \\ hogy
+$s\in\{0, \frac{1}{2}, 1, \frac{3}{2}, ...\}$ és $m_s \in \{-s, ... 0, ..., s\}$
+\subsubsection{Feles spin}
+$\paulix\pauliy\pauliz$
+\subsection{Teljes impulzusmomentum}
+   
+
+\end{document}
