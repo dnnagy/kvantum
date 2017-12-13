@@ -17,11 +17,15 @@
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{amsthm}
+\usepackage{color}
 \theoremstyle{plain}
 \usepackage{graphicx}
 
 %\usepackage{gensymb}
 \usepackage{float}
+
+%linkek 
+\newcommand{\ndurl}[2]{\href{#1}{\color{red}{\underline{#2}}}}
 
 %% New commands
 \newcommand{\ket}[1]{\left| #1 \right >}
@@ -59,6 +63,7 @@
 \newtheorem*{theorem*}{Tétel}
 \newtheorem*{def*}{Definíció}
 \newtheorem*{pld*}{Példa}
+\newtheorem*{megj}{Megjegyzés}
 
 \begin{document}
 
@@ -167,7 +172,7 @@ $|\bra \phi \hat A \ket \psi|^2$ az minek a valószínűsége?
     
     
 \end{itemize}
-
+\section{Harmonikus oszcillátor}
 \section{Impulzusmomentumok}
 \subsection{Pálya-impulzusmomentum}
 A kvantummechanikai impulzusmomentum operátora $\hat{\vec L} = \hat{\vec r} \times \hat{\vec p} = -i \hbar (\vec r \times \nabla)$.
@@ -200,35 +205,85 @@ Gömbi koordinátarendszerben felírva:
 Az $\hat L$ operátor sajátállapotait két kvantumszám határozza meg , $l$ és $m_l$, a sajátvektorokat ezért $\ket{l,m_l}$ jelöli.
 A sajátértékek a következők lehetnek: $l\in \{0,1,2, ...\}$, $m_l \in \{-l,... 0, ..., l\}$.
 
-A továbbiakban lusta fizikus módon $m_l$ helyett $m$-et írunk.
 Ezzel a jelöléssel igazak a következő azonosságok:
 \begin{itemize}
     \item $
-        \hat L^2 \ket{l, m} = \hbar^2 l (l+1) \ket{l,m}
+        \hat L^2 \ket{l, m_l} = \hbar^2 l (l+1) \ket{l,m_l}
     $
     \item $
-        \hat L_z \ket{l, m} = \hbar m \ket{l,m}
+        \hat L_z \ket{l, m_l} = \hbar m_l \ket{l,m_l}
     $
     \item $
-      \hat L_{\pm}\ket{l, m} = \hbar \sqrt{l(l+1) - m(m\pm1)}\ket{l,m\pm 1}
+      \hat L_{\pm}\ket{l, m_l} = \hbar \sqrt{l(l+1) - m_l(m_l\pm1)}\ket{l,m_l\pm 1}
     $
     \item $
-        \hat L_+ \ket{l,m=l} = 0 ~~ \textrm{és} ~~ \hat L_- \ket{l,m=-l} = 0
+        \hat L_+ \ket{l,m_l=l} = 0 ~~ \textrm{és} ~~ \hat L_- \ket{l,m_l=-l} = 0
     $
 \end{itemize}
-Ha $\ket{l,m}$-eket az $\mathcal{L}^2$ téren akarjuk ábrázolni, akkor:
+Ha $\ket{l,m_l}$-eket az $\mathcal{L}^2$ téren akarjuk ábrázolni, akkor:
 \[
-    \bracket{\theta, \varphi}{l,m} = Y^m_l(\theta, \varphi)
+    \bracket{\theta, \varphi}{l,m_l} = Y^{m_l}_l(\theta, \varphi)
 \]
 \[
-   \bracket{l',m'}{l,m} = \int \limits_0^{\pi}\sin\theta d \theta \int \limits_0^{2\pi}d \varphi (Y^{m'}_{l'})^{*} Y^m_l = \delta_{ll'}\delta_{mm'}
+   \bracket{l',m'_l}{l,m_l} = \int \limits_0^{\pi}\sin\theta d \theta \int \limits_0^{2\pi}d \varphi (Y^{m_l'}_{l'})^{*} Y^{m_l}_l = \delta_{ll'}\delta_{m_lm_l'}
 \]
+Az $Y^{m_l}_l(\theta, \varphi)$ függvények a \ndurl{https://en.wikipedia.org/wiki/Spherical_harmonics}{gömbi harmonikusok}
 \subsection{Spin}
 A spin-operátort $\hat S$ jelöli, sajátállapotait két kvantumszám adja meg, $s$ és $m_s$, úgy, \\ hogy
 $s\in\{0, \frac{1}{2}, 1, \frac{3}{2}, ...\}$ és $m_s \in \{-s, ... 0, ..., s\}$
-\subsubsection{Feles spin}
+\subsubsection{Az $s = \frac{1}{2}$ spin és a Pauli-mátrixok}
 $\paulix\pauliy\pauliz$
 \subsection{Teljes impulzusmomentum}
-   
+\subsection{Impulzusmomentumok összeadása és Clebsch–Gordan együtthatók}
+Az pálya-impulzusmomentum és a spin különböző Hilbert-tér elemei, ezért ha össze akarom adni őket,
+akkor a Hilbert-terek direkt szorzatát kell képezni.
+Legyen egy rendszer (pl. H-atom elektronja) ami spinnel és pálya-impulzusmomentummal is rendelkezik.
+Legyenek a spin sajátállapotok $\ket{s, m_s}$ illetve a pálya-impulzusmomentum sajátállapotok $\ket{l, m_l}$.
+Ekkor a teljes impulzusmomentum sajátállapotai a két tér elemeinek direkt szorzata:
+\[
+    \ket{j, m} = \ket{l, m_l} \otimes \ket{s, m_s} \equiv \ket{l, m_l}\ket{s, m_s} \equiv \ket{l, m_l,s, m_s}
+\] 
 
+Ezen a szorzattéren hat a $\hat{\vec J}$ operátor, amit így definiálunk:
+\[
+    \hat{\vec J} = \hat{\vec L} + \hat{\vec S}
+\]
+Ez a jelölés pongyola, mert a $\hat{\vec J}$-nek a szorzattéren vagyis $\mathcal{H}_L \otimes \mathcal{H}_S$-en kell hatnia,
+ezért korrektül:
+\[
+    \hat J_k = \hat L_k \otimes \hat 1 + \hat 1 \otimes \hat S_k
+\]
+Ez a következő képpen hat a sajátállapotokra:
+\[
+    \hat J^2 \ket{j, m} = \hbar^2 j(j+1)\ket{j,m}
+\]
+\[
+    \hat J_z \ket{j, m} = \hbar m\ket{j,m}
+\]
+Szintén be lehet vezetni a léptető operátorokat:
+\begin{itemize}
+    \item $
+        \hat J_{\pm} = \hat J_x \pm  i \hat J_y
+    $
+    \item $
+       \hat J_+ \hat J_-  = \hat J ^2 - \hat J_z^2 + \hbar \hat J_z
+    $
+    \item $
+       \hat J_- \hat J_+  = \hat J ^2 - \hat J_z^2 - \hbar \hat J_z
+    $
+    \item $
+        \commut{\hat J_+}{\hat J_-} = 2 \hbar \hat J_z
+    $
+    \item $
+        \commut{\hat J_z}{\hat J_{\pm}} = \pm \hbar \hat J_{\pm}
+    $
+    \item $
+        \hat J_{\pm}\ket{j,m} = \hbar \sqrt{j(j+1) - m(m\pm1)}\ket{j,m\pm1}
+    $
+\end{itemize}
+\section{Hidrogén-atom}
+\begin{megj}
+    Ha a főkvantumszám $n$, akkor $l_{max}=n-1$ vagyis $l \in \{0,1,...,n-1\}$
+\end{megj}
+\section{Perturbációszámítás}
 \end{document}
