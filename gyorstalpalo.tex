@@ -17,7 +17,7 @@
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{amsthm}
-\usepackage{color}
+\
 \theoremstyle{plain}
 \usepackage{graphicx}
 
@@ -173,6 +173,50 @@ $|\bra \phi \hat A \ket \psi|^2$ az minek a valószínűsége?
     
 \end{itemize}
 \section{Harmonikus oszcillátor}
+A harmonikus oszcillátor esetén a Hamilton-operátor ugyanz, mint a klasszikus Hamilton-függvény:
+\[
+  \hat H = \frac{\hat p^2}{2m} + \frac{1}{2}m\omega^2 \hat x^2  
+\]
+3D esetben:
+\[
+    \hat H = \frac{1}{2m}(\hat p_x^2+\hat p_y^2+\hat p_z^2) + \frac{1}{2}m\omega^2 (\hat x^2 + \hat y^2 + \hat z^2)  
+\]
+Az energiasajátértékekhez meg kell oldani a $\hat H \ket n = E_n \ket n$ egyenletet. Ennek a megoldása 1D-ben
+folytonos bázison:
+\[
+    \ket n = \psi(x)_n = \frac{1}{\sqrt{(2^n n!)}} \cdot \left (\frac{m\omega}{\pi\hbar}\right)^{1/4}
+    \cdot e^{-\frac{m\omega x^2}{2\hbar}} \cdot H_n\left(\sqrt\frac{m\omega}{\hbar}x\right)    
+\]
+ahol $H_n$-ek a Hermite-polinomok:
+\[
+    H_n(z) = (-1)^n e^z^2 \frac{d^n}{dz^n}e^{-z^2}
+\]
+Ezekből 
+\[
+    E_n = \left(n + \frac{1}{2}\right)   \hbar \omega 
+\]
+Az állapotok léptető operátorait a következő képpen definiáljuk:
+\begin{itemize}
+    \item $
+        \hat a = \sqrt{\frac{m\omega}{2\hbar}}\left(\hat x + \frac{i}{m\omega}\hat p\right)
+    $
+    \item $
+       \hat a^{\dag} = \sqrt{\frac{m\omega}{2\hbar}}\left(\hat x - \frac{i}{m\omega}\hat p\right)
+    $
+    \item $
+        \commut{\hat a}{\hat a^{\dag}} = \hat 1
+    $
+    \item $
+        \hat a \ket n = \sqrt n \ket{n-1}
+    $
+    \item $
+        \hat a^{\dag} \ket n = \sqrt{n+1}\ket{n+1}
+    $
+    \item $
+        \ket n = \frac{(\hat a^{\dag})^n}{\sqrt{n!}}\ket 0 
+        \textrm{  folytonos bázison  } \ket 0 = Ce^{-\frac{m\omega x^2}{2\hbar}}
+    $
+\end{itemize}
 \section{Impulzusmomentumok}
 \subsection{Pálya-impulzusmomentum}
 A kvantummechanikai impulzusmomentum operátora $\hat{\vec L} = \hat{\vec r} \times \hat{\vec p} = -i \hbar (\vec r \times \nabla)$.
@@ -286,4 +330,32 @@ Szintén be lehet vezetni a léptető operátorokat:
     Ha a főkvantumszám $n$, akkor $l_{max}=n-1$ vagyis $l \in \{0,1,...,n-1\}$
 \end{megj}
 \section{Perturbációszámítás}
+\subsection{Időfüggetlen perturbációszámítás}
+Adott egy $\hat H$ operátor ami úgy néz ki, hogy $\hat H = \hat H^{(0)} + \lambda \hat H'$, ahol $\lambda$ kicsi, 
+$\lambda\hat H'$ a perturbáció, $\hat H^{(0)}$-nak pedig ismerjük a sajátállapotait:
+\[
+    \hat H^{(0)} \ket{n^{(0)}} = E_n^{(0)} \ket{n^{(0)}} ~, ~~ n=1,2,... 
+\]
+A $\hat H$ sajátérték-problémájának megoldása így fog kinézni sorfejtett alakban:
+\[
+    E_n = \lambda^0 E_n^{(0)} + \lambda^1 E_n^{(1)} + \lambda^2 E_n^{(2)} + ...
+\]
+\[
+  \ket n = \lambda^0 \ket{n^{(0)}} + \lambda^1 \ket{n^{(1)}} + \lambda^2 \ket{n^{(2)}} + ...  
+\]
+Az elsőrendű korrekciók a fentiek alapján:
+\[
+    E_n^{(1)} = \bra{n^{(0)}} \hat H' \ket{n^{(0)}}      
+\]
+\[
+    \ket{n^{(1)}} = \sum\limits_{k\neq n}\frac{\bra{k^{(0)}} \hat H' \ket{n^{(0)}}}{E_n^{(0)}-E_k^{(0)}}
+    \ket{k^{(0)}}
+\]
+
+Másodrendű energia-korrekció:
+\[
+    E_n^{(2)} = \sum\limits_{k\neq n}\frac{\left|\bra{k^{(0)}} \hat H' \ket{n^{(0)}}\right|^2}{E_n^{(0)}-E_k^{(0)}}    
+\]
+
+\textbf{Figyelem!} A fenti korrekciók csak nemdegenerált energiaspektrum esetében igazak.
 \end{document}
