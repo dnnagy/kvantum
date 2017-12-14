@@ -7,7 +7,7 @@
 \setlength{\oddsidemargin}{0cm}
 \setlength{\parindent}{0cm}
 
-
+\usepackage{allrunes}
 \usepackage{amsmath}
 \usepackage[magyar]{babel}
 \usepackage[T1]{fontenc}
@@ -17,7 +17,7 @@
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{amsthm}
-\
+
 \theoremstyle{plain}
 \usepackage{graphicx}
 
@@ -25,7 +25,7 @@
 \usepackage{float}
 
 %linkek 
-\newcommand{\ndurl}[2]{\href{#1}{\color{red}{\underline{#2}}}}
+\newcommand{\ndurl}[2]{\textit{\href{#1}{\underline{#2}}}}
 
 %% New commands
 \newcommand{\ket}[1]{\left| #1 \right >}
@@ -66,9 +66,10 @@
 \newtheorem*{megj}{Megjegyzés}
 
 \begin{document}
-
 \title{Kvantummechanika gyorstalpaló}
 \maketitle
+\newpage
+
 
 \section{Bevezetés}
 A kvantummechanika formalizmusának az alapja a $\mathcal{H}$ komplex Hilbert tér. A kvantummechanikai állapotok a $\mathcal{H}$ Hilbert tér
@@ -81,7 +82,7 @@ A $\mathcal{H}$ Hilbert tér elemei a $\ket{\psi}$ vektorok. A $\mathcal{H}^{*}$
 \begin{itemize}
     \item $\bracket{\phi}{\psi} \in \mathbb{C}$
     \item $\bracket{\phi}{\psi} = \bracket{\psi}{\phi}^{*}$
-    \item $ \norm \psi^2 = \bracket{\psi}{\psi} \geq 0$
+    \item $ \norm{\psi}^2 = \bracket{\psi}{\psi} \geq 0$
 \end{itemize}
 További azonosságok:
 \begin{itemize}
@@ -274,9 +275,45 @@ Ha $\ket{l,m_l}$-eket az $\mathcal{L}^2$ téren akarjuk ábrázolni, akkor:
 Az $Y^{m_l}_l(\theta, \varphi)$ függvények a \ndurl{https://en.wikipedia.org/wiki/Spherical_harmonics}{gömbi harmonikusok}
 \subsection{Spin}
 A spin-operátort $\hat S$ jelöli, sajátállapotait két kvantumszám adja meg, $s$ és $m_s$, úgy, \\ hogy
-$s\in\{0, \frac{1}{2}, 1, \frac{3}{2}, ...\}$ és $m_s \in \{-s, ... 0, ..., s\}$
+$s\in\{0, \frac{1}{2}, 1, \frac{3}{2}, ...\}$ és $m_s \in \{-s, -s+1,...,s-1, s\}$
 \subsubsection{Az $s = \frac{1}{2}$ spin és a Pauli-mátrixok}
-$\paulix\pauliy\pauliz$
+Feles spin esetén $s=\frac{1}{2}$, ezért $m_s \in \{-\frac{1}{2},\frac{1}{2}\}$. Az állapotokat a következő rövidítéssel jelöljük:
+\[
+    \ket + \equiv \ket{\frac{1}{2}, \frac{1}{2}}    
+\]
+\[
+    \ket - \equiv \ket{\frac{1}{2}, -\frac{1}{2}}    
+\]
+Ez egy kétállapotú rendszert határoz meg, egy tetszőleges állapotvektor:
+\[
+    \ket\psi = \alpha\ket+ + \beta\ket- ~,~~ |\alpha|^2 + |\beta|^2 = 1    
+\]
+Ebben az esetben a spin operátora $\vec S = \frac{\hbar}{2}\vec{\sigma}$, ahol
+\[ \sigx = \paulix \]
+\[ \sigy = \pauliy \]
+\[ \sigz = \pauliz \]
+
+A $\sigma_k$-ra vonatkozó azonosságok:
+\begin{itemize}
+    \item $\sigz \ket+ = \frac{\hbar}{2}\ket+$
+    \item $\sigz \ket- = -\frac{\hbar}{2}\ket-$    
+    \item $
+        \commut{\sigma_i}{\sigma_j} = 2i\varepsilon_{ijk}\sigma_k
+    $
+    \item $
+        \sigma_k\sigma_l = \delta_{kl}\mathbf 1 + i\varepsilon_{klj}\sigma_j
+    $
+    \item $
+        (\vec u \vec \sigma)(\vec v\vec\sigma) = (\vec u\cdot\vec v)\mathbf 1 + i(\vec u \times\vec v)\vec\sigma
+    $
+    \item $
+        \sigma_+ = \sigx + i\sigy
+    $
+    \item $
+        \sigma_- = \sigx - i\sigy
+    $
+
+\end{itemize}
 \subsection{Teljes impulzusmomentum}
 \subsection{Impulzusmomentumok összeadása és Clebsch–Gordan együtthatók}
 Az pálya-impulzusmomentum és a spin különböző Hilbert-tér elemei, ezért ha össze akarom adni őket,
@@ -331,8 +368,9 @@ Szintén be lehet vezetni a léptető operátorokat:
 \end{megj}
 \section{Perturbációszámítás}
 \subsection{Időfüggetlen perturbációszámítás}
-Adott egy $\hat H$ operátor ami úgy néz ki, hogy $\hat H = \hat H^{(0)} + \lambda \hat H'$, ahol $\lambda$ kicsi, 
-$\lambda\hat H'$ a perturbáció, $\hat H^{(0)}$-nak pedig ismerjük a sajátállapotait:
+\subsubsection{Nemdegenerált eset}
+Adott egy $\hat H$ operátor ami úgy néz ki, hogy $\hat H = \hat H^{(0)} + \lambda \hat W$, ahol $\lambda$ kicsi, 
+$\lambda\hat W$ a perturbáció, $\hat H^{(0)}$-nak pedig ismerjük a sajátállapotait:
 \[
     \hat H^{(0)} \ket{n^{(0)}} = E_n^{(0)} \ket{n^{(0)}} ~, ~~ n=1,2,... 
 \]
@@ -345,17 +383,39 @@ A $\hat H$ sajátérték-problémájának megoldása így fog kinézni sorfejtet
 \]
 Az elsőrendű korrekciók a fentiek alapján:
 \[
-    E_n^{(1)} = \bra{n^{(0)}} \hat H' \ket{n^{(0)}}      
+    E_n^{(1)} = \bra{n^{(0)}} \hat W \ket{n^{(0)}}      
 \]
 \[
-    \ket{n^{(1)}} = \sum\limits_{k\neq n}\frac{\bra{k^{(0)}} \hat H' \ket{n^{(0)}}}{E_n^{(0)}-E_k^{(0)}}
+    \ket{n^{(1)}} = \sum\limits_{k\neq n}\frac{\bra{k^{(0)}} \hat W \ket{n^{(0)}}}{E_n^{(0)}-E_k^{(0)}}
     \ket{k^{(0)}}
 \]
 
 Másodrendű energia-korrekció:
 \[
-    E_n^{(2)} = \sum\limits_{k\neq n}\frac{\left|\bra{k^{(0)}} \hat H' \ket{n^{(0)}}\right|^2}{E_n^{(0)}-E_k^{(0)}}    
+    E_n^{(2)} = \sum\limits_{k\neq n}\frac{\left|\bra{k^{(0)}} \hat W \ket{n^{(0)}}\right|^2}{E_n^{(0)}-E_k^{(0)}}    
 \]
 
 \textbf{Figyelem!} A fenti korrekciók csak nemdegenerált energiaspektrum esetében igazak.
+
+\subsubsection{Degenerált eset}
+Akkor kell alkalmazni, amikor két vagy több energiaszint egybeesik, vagyis létezik egy degenerált sajátaltér.
+Ekkor a következő szerint járunk el:
+\begin{itemize}
+    \item Vegyük a degenerált altérbe tartozó \textbf{perturbálatlan sajátvektorokat}. 
+    \item Ezután ezekkel a vektorokkal számítsuk ki a $W_{mn} = \bra m \hat W \ket n$ mátrixelemeket.
+    \item Az így kiszámolt mátrix sajátérték-problémájának megoldásai lesznek a perturbált energiaszintek.
+\end{itemize}
+\subsection{Időfüggő perturbációszámítás}
+Most megengedjük, hogy a perturbáció függjön expliciten az időtől:
+\[
+    \hat H(t) = \hat H^{(0)} + \lambda\hat W(t)
+\]
+A következő lépésben be kell vezetni az $\omega_{mn} = (E_m-E_n)/\hbar$ mennyiséget, és a 
+perturbálatlan $\hat H^{(0)}$ operátor $\ket m$ illetve $\ket n$ sajátvektoraiból kiszámítjuk
+a $W_{mn}(t) = \bra m \hat W(t)\ket n$ mátrixelemeket. Legyen most $\ket i$ a kezdeti (initial) $\ket f$
+pedig a végső (final) állapot. Ekkor annak a valószínűsége, hogy $\ket i$ állapotból indulva $t$
+idő elteltével a rendszer $\ket f$ állapotban található:
+\[
+    P_{fi} = \frac{1}{\hbar^2}\left|\int\limits_0^t e^{i\omega_{fi}}\tau W_{fi}(\tau)d\tau\right|^2   
+\]
 \end{document}
