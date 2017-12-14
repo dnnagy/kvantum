@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1513261984 "/Users/nagydaniel/Documents/texek/QM/gyorstalpalo.tex" "gyorstalpalo.pdf" "gyorstalpalo" 1513261984
-  "/Users/nagydaniel/Documents/texek/QM/gyorstalpalo.tex" 1513261984 16479 53344adbb85e0b3e972c1567f76efb82 ""
+["pdflatex"] 1513262170 "/Users/nagydaniel/Documents/texek/QM/gyorstalpalo.tex" "gyorstalpalo.pdf" "gyorstalpalo" 1513262170
+  "/Users/nagydaniel/Documents/texek/QM/gyorstalpalo.tex" 1513262170 16500 8d31862848308b9705d4d46255c95f11 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
@@ -112,11 +112,11 @@
   "/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1490860339 1888048 f2c5faed5981a516f406b2ccc20bff71 ""
   "/usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1490860398 3873397 50936b75940aae539edfe57da8c8d615 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "gyorstalpalo.aux" 1513261620 3606 f222aac778ccc15a3e52f80361117939 ""
-  "gyorstalpalo.out" 1513261620 1468 2f34bfb17dd23f78c6ff43103e1ccab6 ""
-  "gyorstalpalo.tex" 1513261984 16479 53344adbb85e0b3e972c1567f76efb82 ""
+  "gyorstalpalo.aux" 1513262128 3606 f222aac778ccc15a3e52f80361117939 ""
+  "gyorstalpalo.out" 1513262128 1468 2f34bfb17dd23f78c6ff43103e1ccab6 ""
+  "gyorstalpalo.tex" 1513262170 16500 8d31862848308b9705d4d46255c95f11 ""
   (generated)
+  "gyorstalpalo.log"
+  "gyorstalpalo.out"
   "gyorstalpalo.pdf"
   "gyorstalpalo.aux"
-  "gyorstalpalo.out"
-  "gyorstalpalo.log"
