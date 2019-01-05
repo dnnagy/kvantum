@@ -17,6 +17,7 @@
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{amsthm}
+\usepackage{braket}
 
 \theoremstyle{plain}
 \usepackage{graphicx}
@@ -28,9 +29,9 @@
 \newcommand{\ndurl}[2]{\textit{\href{#1}{\underline{#2}}}}
 
 %% New commands
-\newcommand{\ket}[1]{\left| #1 \right >}
-\newcommand{\bra}[1]{\left < #1 \right |}
-\newcommand{\bracket}[2]{\left < #1 \middle | #2 \right>}
+%\newcommand{\ket}[1]{\left| #1 \right >}
+%\newcommand{\bra}[1]{\left < #1 \right |}
+%\newcommand{\braket}[2]{\left < #1 \middle | #2 \right>}
 \newcommand{\norm}[1]{\left{||} #1 \right{||}}
 \newcommand{\commut}[2]{\left [ #1 , #2 \right]}
 
@@ -60,10 +61,14 @@
     \end{array}
     \right)
 }
+
+\newcommand{\dd}{\mathrm{d}}
+
 \newtheorem*{theorem*}{Tétel}
 \newtheorem*{def*}{Definíció}
 \newtheorem*{pld*}{Példa}
 \newtheorem*{megj}{Megjegyzés}
+
 
 \begin{document}
 \title{Kvantummechanika gyorstalpaló}
@@ -80,44 +85,59 @@ A $\mathcal{H}$ Hilbert tér elemei a $\ket{\psi}$ vektorok. A $\mathcal{H}^{*}$
 -vel jelöljük.
 \\ A vektorok skalárszorzására a következő igaz:
 \begin{itemize}
-    \item $\bracket{\phi}{\psi} \in \mathbb{C}$
-    \item $\bracket{\phi}{\psi} = \bracket{\psi}{\phi}^{*}$
-    \item $ \norm{\psi}^2 = \bracket{\psi}{\psi} \geq 0$
+    \item $\braket{\phi | \psi} \in \mathbb{C}$
+    \item $\braket{\phi | \psi} = \braket{\psi|\phi}^{*}$
+    \item $\norm\psi ^2 = \braket{\psi|\psi} \geq 0$
 \end{itemize}
 További azonosságok:
 \begin{itemize}
     \item $(c\ket\psi)^{*} = c^* \bra\psi$
 \end{itemize}
-\\ 
-Ortonormált bázisról beszélünk, ha $\bracket{e_i}{e_j} = \delta_{ij}$
+
 \subsubsection{Reprezentáció}
 Számolások során a Hilbert-tér általában az $\mathcal{L}^2$-tér.
-$$ \psi: \mathbb{R} \rightarrow \mathbb{C} \in \mathcal{L}^2 \iff \norm \psi^2 = \int\limits_{-\infty}^{\infty} |\psi(x)|^2 dx < \infty $$
+Ilyenkor az absztrakt $\ket\psi$ vektorok helyett a $\psi(x)$ függvényt használjuk:
+\begin{equation}
+    \psi: \mathbb{R} \rightarrow \mathbb{C} \in \mathcal{L}^2 \iff \norm \psi^2 = \int\limits_{-\infty}^{\infty} |\psi(x)|^2 dx < \infty
+\end{equation}
+
 \subsection{Kvantumállapot és Born-féle értelmezés}
 A kvantummechanikában minden állapothoz rendelhető egy $\ket\psi$ vektor.
 Az ilyen állapotok 1-re normált állapotok kell hogy legyenek, vagyis
-$\norm \psi = \bracket{\psi}{\psi} = 1$.
-Abban az esetben ha adott egy $\ket k$ bázis, és $\ket \psi$ felírható ezen a bázison:
-$$\ket\psi = \sum\limits_{k=0}^{n} c_k\ket k$$
-ahol  $c_k = \bracket{k}{\psi}$ és ez alapján
-$$\ket \psi = \sum\limits_{k=0}^{n} \bracket{k}{\psi}\ket k $$
+$\norm \psi = \braket{\psi|\psi} = 1$.
+Abban az esetben ha adott egy $\ket j$ \textit{diszkrét, ortonormált} bázis, $\ket \psi$ felírható ezen a bázison:
+\begin{equation}
+    \ket\psi = \sum\limits_{j=0}^{n} c_j\ket j = \sum\limits_{j=0}^{n} \braket{j|\psi}\ket j
+\end{equation}
 
-Ekkor a normálásból következik, hogy 
-$$\bracket{\psi}{\psi} = \sum\limits_{k=0}^{n} c_k^* \sum\limits_{j=0}^{n} c_j \bracket{k}{j} =
-\sum\limits_{k=0}^{n} |c_k|^2 = 1$$
+ahol  $c_j = \braket{j|\psi}$ komplex együtthatók. Fontos: a Born-féle értelmezés alapján $|c_j|^2$ annak a valószínűsége, hogy a $\ket\psi$ állapottal jellemzett
+rendszer éppen a $\ket j$ sajátállapotban található.
+A normálási feltételből következik, hogy 
+\begin{equation}
+    1=\braket{\psi|\psi} = \sum\limits_{k=0}^{n} c_k^* \sum\limits_{j=0}^{n} c_j \braket{k|j} = \sum\limits_{k=0}^{n} |c_k|^2 = 1
+\end{equation}
 továbbá
-$$\sum\limits_{k=0}^{n} \ket k \bra k = \hat{1}$$
+\begin{equation}
+    \sum\limits_{j=0}^{n} \ket j \bra j = \hat{1}
+\end{equation}
 
-Fent $|c_k|^2$ annak a valószínűsége, hogy a $\ket \psi$ állapotban levő rendszer éppen $\ket k$ állapotban található.
-Ez a valószínűség nem feltétlenül 0, mert a $\ket \psi$ egy szuperponált állapot.
-\\ Tehát ha egy rendszer a $\ket a$ állapotban van preparálva és arra vagyok kíváncsi, hogy mi a valószínűsége annak,
-hogy $\ket b$ állapotban találom, akkor a $p = |\bracket{b}{a}|^2$ értéket kell kiszámolni.
+A valószínűségi értelmezés alapján, ha egy rendszer a $\ket a$ állapotban van preparálva és arra vagyok kíváncsi, hogy mi a valószínűsége annak,
+hogy $\ket b$ állapotban találom, akkor a $p = |\braket{b|a}|^2$ értéket kell kiszámolni.
+
+Ha $\ket\phi$ és $\ket\psi$ két kvantumállapot, akkor az átmeneti amplitúdó:
+\begin{equation}
+    \braket{\phi|\psi} = \sum\limits_j \braket{\phi|j}\braket{j|\psi} = \sum\limits_j \phi_j^{*}\psi_j
+\end{equation}
 \subsection{Fiziaki mennyiségek és operátorok}
 A $\mathcal{H}$ Hilbert téren értelmezhetők az $\hat{A} : \mathcal{H} \rightarrow \mathcal{H}$  típusú operátorok.
 Értelmezhető az $\hat{A}$ operátor hermitikus adjungáltja a követkző képpen :
-$$\bra \phi \hat{A} \ket \psi = \bra \psi \hat{A}^\dag \ket \phi$$
+\begin{equation}
+    \bra \phi \hat{A} \ket \psi = \bra \psi \hat{A}^\dag \ket \phi
+\end{equation}
 Itt $\hat{A}^\dag$ -ot az $\hat{A}$ hermitikus adjungáltjának nevezzük és igaz, hogy ha
-$$\ket w = \hat{A}\ket v \implies \bra w = \bra v \hat{A}^\dag$$
+\begin{equation}
+    \ket w = \hat{A}\ket v \implies \bra w = \bra v \hat{A}^\dag
+\end{equation}
 
 \begin{def*}
     A $\hat{H}$ operátort hermitikusnak nevezzük ha $\hat H^\dag = \hat H$.
@@ -146,18 +166,84 @@ $$ \hat A = \sum\limits_{n} a_n \ket n \bra n \textrm{, ahol } \hat A \ket n = a
 \end{theorem*}
 Illetve, ha egy $\hat A$ operátor sajátvektorai ortonormált bázist alkotnak, akkor egy tetszőleges $\ket \psi$ vektor
 kifejthető ezen a bázison:
-$$\hat A \ket n = a_n \ket n \textrm{, és} \bracket{n}{m} = \delta_{mn} \implies \ket\psi = \sum\limits_n \bracket{n}{\psi} \ket n 
+$$\hat A \ket n = a_n \ket n \textrm{, és} \braket{n|m} = \delta_{mn} \implies \ket\psi = \sum\limits_n \braket{n|\psi} \ket n 
 \equiv  \sum\limits_n c_n \ket n$$ 
 Legyen most $\hat A$ hermitikus, $\ket\psi$ egy állapot, úgy, hogy $\hat A \ket n = a_n\ket n$ és $\ket\psi = \sum\limits_n c_n \ket n$.
 Ekkor az $\hat A \ket\psi$ vektor $b_m$ együtthatói az $\ket n$ bázison:
-$$b_m = \bracket{m}{\hat A \psi} = \sum\limits_n \bra{m} \hat A \ket n \bracket{n}{\psi} = \sum\limits_n A_{mn}c_n$$
-Ezért $$ A_{mn} = \bra m \hat A \ket n$$
-$|\bra \phi \hat A \ket \psi|^2$ az minek a valószínűsége?
+$$b_m = \braket{m|\hat A \psi} = \sum\limits_n \bra{m} \hat A \ket n \braket{n|\psi} = \sum\limits_n A_{mn}c_n$$
+Ezért $$A_{mn} = \braket{ m |\hat A | n }$$
+$|\braket{ \phi | \hat A | \psi}|^2$ az minek a valószínűsége?
 
+\subsection{Folytonos bázis, impulzus-reprezentáció}
+Eddig azzal foglalkoztunk, mi van, ha diszkrét bázisunk van, pl az $\ket n$ energia-sajátállapotok bázisa. 
+A kvantummechanikában a bázis általában valamilyen mérhető mennyiséghez tartozó $\hat O$ hermitikus operátor sajátvektoraiból áll.
+Vannak olyan operátorok, melyeknek a spektruma folytonos, így a bázis is folytonos lesz.
+A leggyakoribb ilyen eset az $\hat x$ helyoperátorhoz tartozó $\ket x$ hely-bázis és a $\hat p$ impulzus-operátorhoz
+tartozó $\ket p$ impulzus-bázis.
+\\
+Ekkor $\ket x$ az az állapot amelyben a részecske pontosan az $x$ helyen van és $\hat x\ket x = x\ket x$.
+Hasonlóan $\ket p$ is impulzus-sajátállapot: $\hat p\ket p = p\ket p$.
+Az előbbiek alapján egy tetszőleges $\ket\psi$ állpotban annak a valószínűsége, hogy a részecske az $x$ helyen található:
+$|\braket{x|\psi}|^2$. A $\braket{x|\psi}$ valószínűségi amplitúdót nevezzük hullámfüggvénynek:
+\begin{equation}
+    \psi(x)=\braket{x|\psi}
+\end{equation}
+A normálási feltétel így fog kinézni:
+\begin{equation}
+    1 = \int\dd x |\psi(x)|^2 = \int\dd x \braket{\psi|x}\braket{x|\psi}
+\end{equation} 
+illetve
+\begin{equation}
+    \int\dd x \ket x \bra x = \hat 1
+\end{equation}
+Hasonlóan a diszkrét esethez, itt is definiáljuk az ortonormáltságot:
+\begin{equation}
+    \braket{x'|x} = \delta(x-x')
+\end{equation}
+ezért 
+\begin{equation}
+    \psi(x') = \braket{x'|\psi} = \int\dd x \braket{x'|x}\braket{x|\psi} = \int\dd x \delta (x-x')\psi(x)
+\end{equation}
+Az átmeneti amplitúdó a $\ket\phi$ és $\ket\psi$ kvantumállapotok között így fog alakulni:
+\begin{equation}
+    \braket{\phi|\psi} = \int\dd x \braket{\phi|x}\braket{x|\psi} = \int\dd x \phi^{*}(x)\psi(x)
+\end{equation}
+\\
+Impulzus-bázisban igaz, hogy $\hat p \ket p = p\ket p$. Tudjuk, hogy $\hat p = -i\hbar\partial_x$ (1D-ben).
+Állítsuk elő a $\ket p$ állapotot $\ket x$ bázisban:
+\begin{equation}
+    \ket p = \int\dd x \ket x \braket{x|p}
+\end{equation}
+és legyen $\braket{x|p}=\phi_p(x)$. Ekkor egyrészt igaz, hogy
+\begin{equation}
+    \braket{x|\hat p|p} = \braket{x|p|p} = p\braket{x|p} = p\phi_p(x)
+\end{equation}
+másrészt
+\begin{equation}
+    \hat p \braket{x|p} = -i\hbar\frac{\partial \phi_p(x)}{\partial x} 
+\end{equation}
+tehát
+\begin{equation}
+    -i\hbar\frac{\partial \phi_p(x)}{\partial x} =  p\phi_p(x) \implies \phi_p(x) = A e^{\frac{i}{\hbar} px}
+\end{equation}
+Belátható, a normalizálásból, hogy $A=1/\sqrt{2\pi\hbar}$
 \subsection{Kommutátorok}
-\begin{theorem*}
+\begin{def*}
     Az $\hat A$ és $\hat B$ kommutátora $\commut{\hat A}{\hat B} = \hat A \hat B - \hat B \hat A$. 
+\end{def*}
+\begin{theorem*}
+    Ha $\hat A$ és $\hat B$ kommutálnak, azaz $\commut{\hat A}{\hat B} = 0$, akkor van közös sajátvektor-rendszerük, azaz létezik olyan
+    $\psi$ állapot mindkét operátornak sajátállapota.
 \end{theorem*}
+\begin{theorem*}
+    Ha $\hat A$ és $\hat B$ \textbf{nem} kommutálnak, azaz $\commut{\hat A}{\hat B} \neq 0$, akkor \textbf{nincs} közös sajátvektor-rendszerük, azaz nem 
+    létezik olyan $\ket\psi$ állapot, amely mindkét operátor sajátállapota.
+\end{theorem*}
+\begin{megj}
+    Ha két operátor nem kommutál, attól még egy adott $\ket\psi$ állapot mindkét operátor sajátvektorainak bázisán kifejthető lehet,
+    és ezek egymásba áttranszformálhatók. Pl. $\commut{\hat x}{\hat p} = i\hbar$, de létezik $\braket{p|\psi}$ és $\braket{x|\psi}$
+    kifejtés is.
+\end{megj}
 \begin{itemize}
     \item $\commut{\hat x_i}{\hat x_j} = 0$
     \item $\commut{\hat p_i}{\hat p_j} = 0$
@@ -175,27 +261,27 @@ $|\bra \phi \hat A \ket \psi|^2$ az minek a valószínűsége?
 \end{itemize}
 \section{Harmonikus oszcillátor}
 A harmonikus oszcillátor esetén a Hamilton-operátor ugyanz, mint a klasszikus Hamilton-függvény:
-\[
+\begin{equation}
   \hat H = \frac{\hat p^2}{2m} + \frac{1}{2}m\omega^2 \hat x^2  
-\]
+\end{equation}
 3D esetben:
-\[
+\begin{equation}
     \hat H = \frac{1}{2m}(\hat p_x^2+\hat p_y^2+\hat p_z^2) + \frac{1}{2}m\omega^2 (\hat x^2 + \hat y^2 + \hat z^2)  
-\]
+\end{equation}
 Az energiasajátértékekhez meg kell oldani a $\hat H \ket n = E_n \ket n$ egyenletet. Ennek a megoldása 1D-ben
 folytonos bázison:
-\[
-    \ket n = \psi(x)_n = \frac{1}{\sqrt{(2^n n!)}} \cdot \left (\frac{m\omega}{\pi\hbar}\right)^{1/4}
+\begin{equation}
+    \ket n = \psi_n(x) = \frac{1}{\sqrt{(2^n n!)}} \cdot \left (\frac{m\omega}{\pi\hbar}\right)^{1/4}
     \cdot e^{-\frac{m\omega x^2}{2\hbar}} \cdot H_n\left(\sqrt\frac{m\omega}{\hbar}x\right)    
-\]
+\end{equation}
 ahol $H_n$-ek a Hermite-polinomok:
-\[
-    H_n(z) = (-1)^n e^z^2 \frac{d^n}{dz^n}e^{-z^2}
-\]
+\begin{equation}
+    H_n(z) = (-1)^n e^z^2 \frac{\dd^n}{\dd z^n}e^{-z^2}
+\end{equation}
 Ezekből 
-\[
+\begin{equation}
     E_n = \left(n + \frac{1}{2}\right)   \hbar \omega 
-\]
+\end{equation}
 \pagebreak
 Az állapotok léptető operátorait a következő képpen definiáljuk:
 \begin{itemize}
@@ -219,6 +305,8 @@ Az állapotok léptető operátorait a következő képpen definiáljuk:
         \textrm{  folytonos bázison  } \ket 0 = Ce^{-\frac{m\omega x^2}{2\hbar}}
     $
 \end{itemize}
+
+
 \section{Impulzusmomentumok}
 \subsection{Pálya-impulzusmomentum}
 A kvantummechanikai impulzusmomentum operátora $\hat{\vec L} = \hat{\vec r} \times \hat{\vec p} = -i \hbar (\vec r \times \nabla)$.
@@ -267,32 +355,34 @@ Ezzel a jelöléssel igazak a következő azonosságok:
     $
 \end{itemize}
 Ha $\ket{l,m_l}$-eket az $\mathcal{L}^2$ téren akarjuk ábrázolni, akkor:
-\[
-    \bracket{\theta, \varphi}{l,m_l} = Y^{m_l}_l(\theta, \varphi)
-\]
-\[
-   \bracket{l',m'_l}{l,m_l} = \int \limits_0^{\pi}\sin\theta d \theta \int \limits_0^{2\pi}d \varphi (Y^{m_l'}_{l'})^{*} Y^{m_l}_l = \delta_{ll'}\delta_{m_lm_l'}
-\]
+\begin{equation}
+    \braket{\theta, \varphi | l,m_l} = Y^{m_l}_l(\theta, \varphi)
+\end{equation}
+\begin{equation}
+   \braket{l',m'_l|l,m_l} = \int \limits_0^{\pi}\sin\theta d \theta \int \limits_0^{2\pi}d \varphi (Y^{m_l'}_{l'})^{*} Y^{m_l}_l = \delta_{ll'}\delta_{m_lm_l'}
+\end{equation}
 Az $Y^{m_l}_l(\theta, \varphi)$ függvények a \ndurl{https://en.wikipedia.org/wiki/Spherical_harmonics}{gömbi harmonikusok}
+
 \subsection{Spin}
 A spin-operátort $\hat S$ jelöli, sajátállapotait két kvantumszám adja meg, $s$ és $m_s$, úgy, \\ hogy
 $s\in\{0, \frac{1}{2}, 1, \frac{3}{2}, ...\}$ és $m_s \in \{-s, -s+1,...,s-1, s\}$
+
 \subsubsection{Az $s = \frac{1}{2}$ spin és a Pauli-mátrixok}
 Feles spin esetén $s=\frac{1}{2}$, ezért $m_s \in \{-\frac{1}{2},\frac{1}{2}\}$. Az állapotokat a következő rövidítéssel jelöljük:
-\[
+\begin{equation}
     \ket + \equiv \ket{\frac{1}{2}, \frac{1}{2}}    
-\]
-\[
+\end{equation}
+\begin{equation}
     \ket - \equiv \ket{\frac{1}{2}, -\frac{1}{2}}    
-\]
+\end{equation}
 Ez egy kétállapotú rendszert határoz meg, egy tetszőleges állapotvektor:
-\[
+\begin{equation}
     \ket\psi = \alpha\ket+ + \beta\ket- ~,~~ |\alpha|^2 + |\beta|^2 = 1    
-\]
+\end{equation}
 Ebben az esetben a spin operátora $\vec S = \frac{\hbar}{2}\vec{\sigma}$, ahol
-\[ \sigx = \paulix \]
-\[ \sigy = \pauliy \]
-\[ \sigz = \pauliz \]
+\begin{equation} \sigx = \paulix \end{equation}
+\begin{equation} \sigy = \pauliy \end{equation}
+\begin{equation} \sigz = \pauliz \end{equation}
 
 A $\sigma_k$-ra vonatkozó azonosságok:
 \begin{itemize}
@@ -322,26 +412,26 @@ akkor a Hilbert-terek direkt szorzatát kell képezni.
 Legyen egy rendszer (pl. H-atom elektronja) ami spinnel és pálya-impulzusmomentummal is rendelkezik.
 Legyenek a spin sajátállapotok $\ket{s, m_s}$ illetve a pálya-impulzusmomentum sajátállapotok $\ket{l, m_l}$.
 Ekkor a teljes impulzusmomentum sajátállapotai a két tér elemeinek direkt szorzata:
-\[
+\begin{equation}
     \ket{j, m} = \ket{l, m_l} \otimes \ket{s, m_s} \equiv \ket{l, m_l}\ket{s, m_s} \equiv \ket{l, m_l,s, m_s}
-\] 
+\end{equation} 
 
 Ezen a szorzattéren hat a $\hat{\vec J}$ operátor, amit így definiálunk:
-\[
+\begin{equation}
     \hat{\vec J} = \hat{\vec L} + \hat{\vec S}
-\]
+\end{equation}
 Ez a jelölés pongyola, mert a $\hat{\vec J}$-nek a szorzattéren vagyis $\mathcal{H}_L \otimes \mathcal{H}_S$-en kell hatnia,
 ezért korrektül:
-\[
+\begin{equation}
     \hat J_k = \hat L_k \otimes \hat 1 + \hat 1 \otimes \hat S_k
-\]
+\end{equation}
 Ez a következő képpen hat a sajátállapotokra:
-\[
+\begin{equation}
     \hat J^2 \ket{j, m} = \hbar^2 j(j+1)\ket{j,m}
-\]
-\[
+\end{equation}
+\begin{equation}
     \hat J_z \ket{j, m} = \hbar m\ket{j,m}
-\]
+\end{equation}
 Szintén be lehet vezetni a léptető operátorokat:
 \begin{itemize}
     \item $
@@ -372,29 +462,29 @@ Szintén be lehet vezetni a léptető operátorokat:
 \subsubsection{Nemdegenerált eset}
 Adott egy $\hat H$ operátor ami úgy néz ki, hogy $\hat H = \hat H^{(0)} + \lambda \hat W$, ahol $\lambda$ kicsi, 
 $\lambda\hat W$ a perturbáció, $\hat H^{(0)}$-nak pedig ismerjük a sajátállapotait:
-\[
+\begin{equation}
     \hat H^{(0)} \ket{n^{(0)}} = E_n^{(0)} \ket{n^{(0)}} ~, ~~ n=1,2,... 
-\]
+\end{equation}
 A $\hat H$ sajátérték-problémájának megoldása így fog kinézni sorfejtett alakban:
-\[
+\begin{equation}
     E_n = \lambda^0 E_n^{(0)} + \lambda^1 E_n^{(1)} + \lambda^2 E_n^{(2)} + ...
-\]
-\[
+\end{equation}
+\begin{equation}
   \ket n = \lambda^0 \ket{n^{(0)}} + \lambda^1 \ket{n^{(1)}} + \lambda^2 \ket{n^{(2)}} + ...  
-\]
+\end{equation}
 Az elsőrendű korrekciók a fentiek alapján:
-\[
+\begin{equation}
     E_n^{(1)} = \bra{n^{(0)}} \hat W \ket{n^{(0)}}      
-\]
-\[
+\end{equation}
+\begin{equation}
     \ket{n^{(1)}} = \sum\limits_{k\neq n}\frac{\bra{k^{(0)}} \hat W \ket{n^{(0)}}}{E_n^{(0)}-E_k^{(0)}}
     \ket{k^{(0)}}
-\]
+\end{equation}
 
 Másodrendű energia-korrekció:
-\[
+\begin{equation}
     E_n^{(2)} = \sum\limits_{k\neq n}\frac{\left|\bra{k^{(0)}} \hat W \ket{n^{(0)}}\right|^2}{E_n^{(0)}-E_k^{(0)}}    
-\]
+\end{equation}
 
 \textbf{Figyelem!} A fenti korrekciók csak nemdegenerált energiaspektrum esetében igazak.
 
@@ -408,15 +498,15 @@ Ekkor a következő szerint járunk el:
 \end{itemize}
 \subsection{Időfüggő perturbációszámítás}
 Most megengedjük, hogy a perturbáció függjön expliciten az időtől:
-\[
+\begin{equation}
     \hat H(t) = \hat H^{(0)} + \lambda\hat W(t)
-\]
+\end{equation}
 A következő lépésben be kell vezetni az $\omega_{mn} = (E_m-E_n)/\hbar$ mennyiséget, és a 
 perturbálatlan $\hat H^{(0)}$ operátor $\ket m$ illetve $\ket n$ sajátvektoraiból kiszámítjuk
 a $W_{mn}(t) = \bra m \hat W(t)\ket n$ mátrixelemeket. Legyen most $\ket i$ a kezdeti (initial) $\ket f$
 pedig a végső (final) állapot. Ekkor annak a valószínűsége, hogy $\ket i$ állapotból indulva $t$
 idő elteltével a rendszer $\ket f$ állapotban található:
-\[
+\begin{equation}
     P(i\rightarrow f) = P_{fi} = \frac{1}{\hbar^2}\left|\int\limits_0^t W_{fi}(\tau) e^{i\omega_{fi}\tau} d\tau\right|^2   
-\]
+\end{equation}
 \end{document}
