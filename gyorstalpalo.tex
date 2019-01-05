@@ -175,6 +175,7 @@ Ezért $$A_{mn} = \braket{ m |\hat A | n }$$
 $|\braket{ \phi | \hat A | \psi}|^2$ az minek a valószínűsége?
 
 \subsection{Folytonos bázis, impulzus-reprezentáció}
+\subsubsection{Hely-bázis}
 Eddig azzal foglalkoztunk, mi van, ha diszkrét bázisunk van, pl az $\ket n$ energia-sajátállapotok bázisa. 
 A kvantummechanikában a bázis általában valamilyen mérhető mennyiséghez tartozó $\hat O$ hermitikus operátor sajátvektoraiból áll.
 Vannak olyan operátorok, melyeknek a spektruma folytonos, így a bázis is folytonos lesz.
@@ -208,7 +209,8 @@ Az átmeneti amplitúdó a $\ket\phi$ és $\ket\psi$ kvantumállapotok között 
 \begin{equation}
     \braket{\phi|\psi} = \int\dd x \braket{\phi|x}\braket{x|\psi} = \int\dd x \phi^{*}(x)\psi(x)
 \end{equation}
-\\
+
+\subsubsection{Impulzus-bázis}
 Impulzus-bázisban igaz, hogy $\hat p \ket p = p\ket p$. Tudjuk, hogy $\hat p = -i\hbar\partial_x$ (1D-ben).
 Állítsuk elő a $\ket p$ állapotot $\ket x$ bázisban:
 \begin{equation}
@@ -226,7 +228,40 @@ tehát
 \begin{equation}
     -i\hbar\frac{\partial \phi_p(x)}{\partial x} =  p\phi_p(x) \implies \phi_p(x) = A e^{\frac{i}{\hbar} px}
 \end{equation}
-Belátható, a normalizálásból, hogy $A=1/\sqrt{2\pi\hbar}$
+A normalizálás az előbbihez hasonló módon történik:
+\begin{equation}
+    \braket{p'|p} = \delta(p-p')
+\end{equation}
+emiatt:
+\begin{eqnarray}
+    \delta(p-p') = \braket{p'|p} = \int\dd x \braket{p'|x}\braket{x|p} \\
+    = \int\dd x \phi_{p'}^{*}(x)\phi_p(x) \\
+    = \int\dd x A^2 e^{\frac{i}{\hbar} (p-p') x} \\
+    = 2\pi\hbar A^2 \delta (p-p')
+\end{eqnarray}
+Innen pedig következik, hogy $A=1/\sqrt{2\pi\hbar}$.
+
+Át lehet váltani a hullámfüggvényt impulzustérbe is, felhasználva, hogy $\hat x\ket x = x\ket x$ és $\braket{p|x}=\tilde\phi_x(p)$
+\begin{equation}
+    \ket x = \int\dd p \ket p \braket{p|x}
+\end{equation}
+Az előző esethez hasonlóan
+\begin{equation}
+    \braket{p|\hat x|x} = \braket{p|x|x} = x \braket{p|x} = x\tilde\phi_x(p)
+\end{equation}
+Most jön egy trükk: az $\hat x$ operátor hatása impulzustérben $\hat x = i\hbar\partial_p$, ezért
+\begin{equation}
+    \hat x \braket{p|x} = i\hbar \frac{\partial\tilde\phi_x(p)}{\partial p}
+\end{equation}
+Így 
+\begin{equation}
+    i\hbar \frac{\partial\tilde\phi_x(p)}{\partial p} = x\tilde\phi_x(p) \implies \tilde\phi_x(p) = B e^{-\frac{i}{\hbar}px}
+\end{equation}
+
+Az előbbiekhez hasonlóan belátható, hogy $B=1/\sqrt{2\pi\hbar}$. Azt kaptuk tehát, hogy $\phi_p(x)$ és $\tilde\phi_x(p)$ egymás komplex konjugáltjai,
+amit el is vártunk, hiszen $\braket{p|x}=\braket{x|p}^{*}$ definíció szerint.
+
+
 \subsection{Kommutátorok}
 \begin{def*}
     Az $\hat A$ és $\hat B$ kommutátora $\commut{\hat A}{\hat B} = \hat A \hat B - \hat B \hat A$. 
