@@ -258,8 +258,16 @@ Most jön egy trükk: az $\hat x$ operátor hatása impulzustérben $\hat x = i\
     i\hbar \frac{\partial\tilde\phi_x(p)}{\partial p} = x\tilde\phi_x(p) \implies \tilde\phi_x(p) = B e^{-\frac{i}{\hbar}px}
 \end{equation}
 
-Az előbbiekhez hasonlóan belátható, hogy $B=1/\sqrt{2\pi\hbar}$. Azt kaptuk tehát, hogy $\phi_p(x)$ és $\tilde\phi_x(p)$ egymás komplex konjugáltjai,
+Az előbbiekhez hasonlóan belátható, hogy $B=1/\sqrt{2\pi\hbar}$. Azt kaptuk tehát, hogy $\tilde\phi_x(p) = \phi^{*}_p(x)$ egymás komplex konjugáltjai,
 amit el is vártunk, hiszen $\braket{p|x}=\braket{x|p}^{*}$ definíció szerint.
+
+A bázistranszformációhoz szükséges összefüggések:
+\begin{eqnarray}
+    \braket{x|p} = \phi_p(x) = \frac{1}{\sqrt{2\pi\hbar}}e^{\frac{i}{\hbar}px} \\ [8pt]
+    \braket{p|x} = \tilde\phi_x(p) = \frac{1}{\sqrt{2\pi\hbar}}e^{-\frac{i}{\hbar}px} \\ [8pt]
+    \ket p = \int\dd x \ket x \braket{x|p} = \frac{1}{\sqrt{2\pi\hbar}} \int\dd x e^{\frac{i}{\hbar}px} \ket x \\ [8pt]
+    \ket x = \int\dd p \ket p \braket{p|x} = \frac{1}{\sqrt{2\pi\hbar}} \int\dd p e^{-\frac{i}{\hbar}px} \ket p \\
+\end{eqnarray}
 
 
 \subsection{Kommutátorok}
