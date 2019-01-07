@@ -1,26 +1,106 @@
+% \documentclass[12pt]{article}
+% \setlength{\textwidth}{17cm}
+% \setlength{\textheight}{24cm}
+% \setlength{\topmargin}{-2cm}
+% \setlength{\footskip}{1cm}
+% \setlength{\evensidemargin}{0cm}
+% \setlength{\oddsidemargin}{0cm}
+% \setlength{\parindent}{0cm}
+
+% \usepackage{allrunes}
+% \usepackage{amsmath}
+% \usepackage[magyar]{babel}
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage{fixltx2e}
+% \usepackage{multirow}
+% \usepackage{hyperref}
+% \usepackage{amsfonts}
+% \usepackage{amsthm}
+% \usepackage{braket}
+
+% \theoremstyle{plain}
+% \usepackage{graphicx}
+
+% %\usepackage{gensymb}
+% \usepackage{float}
+
+% %linkek 
+% \newcommand{\ndurl}[2]{\textit{\href{#1}{\underline{#2}}}}
+
+% %% New commands
+% %\newcommand{\ket}[1]{\left| #1 \right >}
+% %\newcommand{\bra}[1]{\left < #1 \right |}
+% %\newcommand{\braket}[2]{\left < #1 \middle | #2 \right>}
+% \newcommand{\norm}[1]{\left{||} #1 \right{||}}
+% \newcommand{\commut}[2]{\left [ #1 , #2 \right]}
+
+% %% Pauli matrices
+% \newcommand{\sigx}{\sigma_x}
+% \newcommand{\sigy}{\sigma_y}
+% \newcommand{\sigz}{\sigma_z}
+
+% \newcommand{\paulix}{
+%     \left( \begin{array}{cc}
+%         0 & 1 \\
+%         1 & 0
+%     \end{array}
+%     \right)
+% }
+% \newcommand{\pauliy}{
+%     \left( \begin{array}{cc}
+%         0 & -i \\
+%         i & 0
+%     \end{array}
+%     \right)
+% }
+% \newcommand{\pauliz}{
+%     \left( \begin{array}{cc}
+%         1 & 0 \\
+%         0 & -1
+%     \end{array}
+%     \right)
+% }
+
+% \newcommand{\dd}{\mathrm{d}}
+
+% \newtheorem*{theorem*}{Tétel}
+% \newtheorem*{def*}{Definíció}
+% \newtheorem*{pld*}{Példa}
+% \newtheorem*{megj}{Megjegyzés}
+
+
+% \begin{document}
+% \title{Kvantummechanika gyorstalpaló}
+% \maketitle
+% \newpage
 \documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
 \setlength{\textwidth}{17cm}
 \setlength{\textheight}{24cm}
 \setlength{\topmargin}{-2cm}
 \setlength{\footskip}{1cm}
 \setlength{\evensidemargin}{0cm}
 \setlength{\oddsidemargin}{0cm}
-\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{2em}
 
 \usepackage{allrunes}
 \usepackage{amsmath}
 \usepackage[magyar]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage{fixltx2e}
 \usepackage{multirow}
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{amsthm}
-\usepackage{braket}
+\usepackage{amssymb}
 
 \theoremstyle{plain}
 \usepackage{graphicx}
+
+\newcommand{\code}[1]{\texttt{#1}}
 
 %\usepackage{gensymb}
 \usepackage{float}
@@ -28,12 +108,12 @@
 %linkek 
 \newcommand{\ndurl}[2]{\textit{\href{#1}{\underline{#2}}}}
 
-%% New commands
-%\newcommand{\ket}[1]{\left| #1 \right >}
-%\newcommand{\bra}[1]{\left < #1 \right |}
-%\newcommand{\braket}[2]{\left < #1 \middle | #2 \right>}
-\newcommand{\norm}[1]{\left{||} #1 \right{||}}
-\newcommand{\commut}[2]{\left [ #1 , #2 \right]}
+\usepackage{braket}
+
+\newcommand{\dd}{\textrm{d}}
+
+\newcommand{\mev}{~\textrm{MeV}}
+\newcommand{\fm}{~\textrm{fm}}
 
 %% Pauli matrices
 \newcommand{\sigx}{\sigma_x}
@@ -62,17 +142,40 @@
     \right)
 }
 
-\newcommand{\dd}{\mathrm{d}}
+\newcommand{\twopartdef}[4]
+{
+    \left\{
+        \begin{array}{ll}
+            #1 & \mbox{if } #2 \\
+            #3 & \mbox{if } #4
+        \end{array}
+        \right.
+}
+
+% Bold vectors
+\newcommand{\bv}[1]{\boldsymbol{#1}}
+
+% Column vectors
+\newcommand{\colvec}[1]{\begin{bmatrix} #1 \end{bmatrix}}
 
 \newtheorem*{theorem*}{Tétel}
 \newtheorem*{def*}{Definíció}
 \newtheorem*{pld*}{Példa}
 \newtheorem*{megj}{Megjegyzés}
 
-
 \begin{document}
 \title{Kvantummechanika gyorstalpaló}
+\author{Nagy Dániel}
+\date{\today}
+
 \maketitle
+\vspace*{7.5cm}
+\begin{figure}[h!]
+    \begin{center}
+    \includegraphics[width=0.4\textwidth]{./images/elte.eps}
+    \end{center}
+\end{figure}
+
 \newpage
 
 

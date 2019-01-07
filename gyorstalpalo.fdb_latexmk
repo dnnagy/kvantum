@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1546716755 "/Users/nagydaniel/Documents/sajat_jegyzet/QM/gyorstalpalo.tex" "gyorstalpalo.pdf" "gyorstalpalo" 1546716755
-  "/Users/nagydaniel/Documents/sajat_jegyzet/QM/gyorstalpalo.tex" 1546716753 22905 85187ef294c1e6d41bbcbc45e055b2f4 ""
+["pdflatex"] 1546874337 "/Users/nagydaniel/Documents/sajat_jegyzet/QM/gyorstalpalo.tex" "gyorstalpalo.pdf" "gyorstalpalo" 1546874337
+  "/Users/nagydaniel/Documents/sajat_jegyzet/QM/gyorstalpalo.tex" 1546874335 24989 7a376fb5c73b21224496ad3d4fa4bc62 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2016/texmf-dist/fonts/tfm/jknappen/ec/ecbi1200.tfm" 1136768653 3072 ccae1a240ab272417e4399fe942df546 ""
@@ -71,6 +71,7 @@
   "/usr/local/texlive/2016/texmf-dist/tex/latex/allrunes/art.fd" 1137109878 5992 1df1faa66052fd56fa3b8d286d539c95 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/amscls/amsthm.sty" 1428861406 12225 3cca0d18522255979a1047206228b9d0 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amsfonts.sty" 1359763108 5949 3f3fd50a8cc94c3d4cbf4fc66cd3df1c ""
+  "/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/amssymb.sty" 1359763108 13829 94730e64147574077f8ecfea9bb69af4 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd" 1359763108 961 6518c6525a34feb5e8250ffa91731cff ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd" 1359763108 961 d02606146ba5601b5645f987c92e6193 ""
   "/usr/local/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty" 1456875012 2210 5c54ab129b848a5071554186d0168766 ""
@@ -115,10 +116,11 @@
   "/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1490860339 1888048 f2c5faed5981a516f406b2ccc20bff71 ""
   "/usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1490860398 3873397 50936b75940aae539edfe57da8c8d615 ""
   "/usr/local/texlive/2016/texmf.cnf" 1463979140 577 2938757e76f31531e65cc647e3507693 ""
-  "gyorstalpalo.aux" 1546716755 8 a94a2480d3289e625eea47cd1b285758 ""
-  "gyorstalpalo.tex" 1546716753 22905 85187ef294c1e6d41bbcbc45e055b2f4 ""
+  "gyorstalpalo.aux" 1546874337 8 a94a2480d3289e625eea47cd1b285758 ""
+  "gyorstalpalo.tex" 1546874335 24989 7a376fb5c73b21224496ad3d4fa4bc62 ""
+  "images/elte.eps" 1476787244 1093458 e56a8c269a0a7c7a62fb0cef1fa20252 ""
   (generated)
   "gyorstalpalo.pdf"
-  "gyorstalpalo.out"
   "gyorstalpalo.aux"
   "gyorstalpalo.log"
+  "gyorstalpalo.out"
